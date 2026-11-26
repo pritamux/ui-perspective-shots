@@ -1,8 +1,8 @@
 # ui-perspective-shots
 
-An agent skill for launch videos and social stills of a product's real interface: the UI on a tilted plane, with depth of field, light falloff and a live, moving interface, rendered frame by frame.
+An agent skill that films your product's real UI on a tilted plane: depth of field, light falloff and a live interface, rendered frame by frame. It makes one launch video and a set of stills.
 
-Capture the real thing, fill it with clean mock data, then point a camera at it.
+Capture the real page, fill it with mock data, then point a camera at it.
 
 ![A live activity feed shot on a tilted plane, rows landing while the camera drifts](media/reference.jpg)
 
@@ -22,19 +22,13 @@ Then ask your agent for the set, or call it directly:
 
 ## What it makes
 
-- **One launch video:** about 17 seconds at 1080p, 60 fps. A steady push-in on the page title, a constant drift over the live surface, a locked hold on the core interaction, one glide between two moments on a record, and an end card whose lines come into focus. Hard cuts that land on motion.
-- **5–8 stills:** 3840×2160 PNGs from the same captured UI.
-- **Optional reels:** fixed camera arcs (orbit, crane, sweep) and macro trucks, for standalone posts.
+- One launch video, about 17 seconds at 1080p and 60 fps. A push-in on the title, a drift over the live feed, a hold on the main interaction, one glide on a record, then an end card.
+- 5 to 8 stills at 3840×2160 from the same capture.
+- Optional reels of camera arcs and macro pans, for separate posts.
 
-## How it works
+![How it works](media/how-it-works.png)
 
-1. **Capture.** `capture.cjs` opens each page on your dev server and saves its DOM, the compiled CSS and the fonts. The shots use your product's real components instead of a hand-drawn copy.
-2. **Mock.** A small project file clones captured rows as templates and fills them with round numbers, recognisable names and one hero record that carries the story across screens.
-3. **Check flat.** `flat.cjs` renders every page head-on, so you can catch truncation or leftover template values before any camera work.
-4. **Frame.** `measure.cjs` prints element positions in scene coordinates; the camera aims at numbers, never at guesses.
-5. **Render.** The stage draws the page three times (sharp, soft, heavy blur), masks the blurred copies along the plane's depth for a real focus band, adds light falloff and a trace of grain, then advances time frame by frame and hands each frame to ffmpeg.
-
-The camera language is in `SKILL.md`: which move each kind of shot gets, constant-speed tracking inside a shot, easing only for one deliberate glide, and exact curves and timings for every UI change (rows landing, values crossfading, popovers lifting).
+![The rules](media/the-rules.png)
 
 ## What's inside
 
