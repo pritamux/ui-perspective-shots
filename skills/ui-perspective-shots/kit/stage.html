@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="capture/app.css" />
+<style>
+html, body { margin: 0 !important; background: #050404 !important; overflow: hidden !important; }
+#view { position: fixed; inset: 0; overflow: hidden; background: #070605; }
+.layer { position: absolute; inset: 0; }
+.cam { position: absolute; inset: 0; perspective-origin: 50% 50%; }
+.rig { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; }
+.scene { position: absolute; left: 0; top: 0; display: none; transform-style: preserve-3d; }
+.zoom { position: relative; transform-style: preserve-3d; }
+.zoom > div:first-child { border-radius: 14px; }
+.scene *, .scene *::before, .scene *::after { animation: none !important; transition: none !important; }
+.persp-glow { position: absolute; inset: 0; background: var(--highlight-strong, rgb(255 255 255 / 0.08)); opacity: 0; pointer-events: none; }
+.persp-caret { position: absolute; width: 1.5px; height: 18px; background: var(--foreground, #fafaf9); }
+.persp-pop { position: absolute; z-index: 60; }
+.persp-pop-shadow { position: absolute; border-radius: 16px; background: rgb(0 0 0 / 0.8); filter: blur(22px); }
+#fx-light, #fx-vig, #grain { position: absolute; inset: 0; pointer-events: none; }
+#grain { width: 100%; height: 100%; opacity: 0.025; }
+#endcard { position: absolute; inset: 0; display: none; background: var(--background, #0b0908); color: var(--foreground, #fafaf9);
+  flex-direction: column; align-items: center; justify-content: center; }
+#endcard .lockup { height: 44px; width: auto; color: var(--foreground, #fafaf9); }
+#endcard .title { font-size: 168px; line-height: 1; margin-top: 52px; letter-spacing: 0.01em; }
+#endcard .url { margin-top: 44px; font-size: 34px; color: var(--muted-foreground, #a8a29e); }
+</style>
+<script src="capture/data.js"></script>
+</head>
+<body>
+<div id="view">
+  <div class="layer" id="L0"></div>
+  <div class="layer" id="L1"></div>
+  <div class="layer" id="L2"></div>
+  <div id="fx-light"></div>
+  <div id="fx-vig"></div>
+  <div id="endcard"><div data-k="end-logo"></div><div class="title" data-k="end-title">Feature</div><div class="url" data-k="end-url">example.com/feature</div></div>
+  <canvas id="grain" width="1920" height="1080"></canvas>
+</div>
+<script src="kit/engine.js"></script>
+<script src="project.js"></script>
+<script src="kit/run.js"></script>
+</body>
+</html>

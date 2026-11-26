@@ -1,0 +1,7 @@
+{
+  "base": "http://localhost:4173",
+  "viewport": [1440, 1000],
+  "settle": 1500,
+  "pages": { "home": "/index.html", "order": "/order.html" },
+  "popovers": []
+}

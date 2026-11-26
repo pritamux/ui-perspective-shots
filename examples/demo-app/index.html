@@ -1,0 +1,38 @@
+<!doctype html>
+<html class="dark">
+<head>
+<meta charset="utf-8" />
+<title>Acme · Activity</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+  <nav class="nav">
+    <span class="brand"><svg viewBox="0 0 18 18" fill="currentColor" data-logo><path d="M9 0 18 18H0Z" /></svg>Acme</span>
+    <a href="#" aria-current="page">Activity</a><a href="#">Orders</a><a href="#">Customers</a><a href="#">Settings</a>
+  </nav>
+  <main class="page">
+    <h1>Activity</h1>
+    <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7" /><path d="m21 21-6-6" /></svg><input placeholder="Search by order, customer or ID" /></label>
+    <div class="grid">
+      <section class="panel" aria-label="Live events">
+        <h2>Live events</h2>
+        <div class="feed"><ul>
+          <li><span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" /></svg></span>
+            <span class="who"><span class="title">Payment received</span><span class="time">09:41:07</span></span>
+            <span class="amount"><span class="label">Amount</span><span class="value">$1,250.00</span></span></li>
+        </ul></div>
+      </section>
+      <section class="panel" aria-label="Recent orders">
+        <h2>Recent orders</h2>
+        <div class="feed"><ul>
+          <li><span class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16l-2 12H6Z" /></svg></span>
+            <span class="who"><span class="title">Order #1042</span><span class="time">09:41:07</span></span>
+            <span class="amount"><span class="label">Status</span><span class="value status"><span class="dot good"></span>Paid</span></span></li>
+        </ul></div>
+      </section>
+    </div>
+  </main>
+</div>
+</body>
+</html>
