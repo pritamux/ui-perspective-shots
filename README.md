@@ -85,7 +85,7 @@ node kit/render.cjs video out/demo.mp4
 
 ## Credits
 
-Inspired by Emil Kowalski and the many other great designers and design engineers who share their craft on X. The tracking speeds and hard-cut grammar were measured from Linear's product release videos.
+Inspired by Emil Kowalski and the many other great designers and design engineers who share their craft on X.
 
 ## License
 

@@ -196,8 +196,8 @@ function cruise(p, e = 0.25) {
 // and sweeping rx is a crane over it (elevation). dz may change too for an arc that pushes in.
 const arc = (base, from, to, dur, e = 0.25) => ({ dur, path: (t) => mix({ ...base, ...from }, { ...base, ...to }, cruise(t / dur, e)) });
 
-// Track: constant speed from frame 0 to the last frame, no easing inside the shot. Linear's
-// releases move this way (measured: 5% of frame width per second for a drift, 12.5% for a track);
+// Track: constant speed from frame 0 to the last frame, no easing inside the shot. Good product
+// release videos move this way (about 5% of frame width per second for a drift, 12.5% for a track);
 // the shot is cut into already moving and cut out of still moving, so nothing eases to a stop.
 const track = (base, from, to, dur) => ({ dur, path: (t) => mix({ ...base, ...from }, { ...base, ...to }, clamp(t / dur)) });
 // Pairwise keyframes: each pair eases in and out on its own (a hold, a glide, a hold). Use for one
@@ -223,7 +223,7 @@ function swap(prev, next, since) {
 const pulse = (since) => since < 0 ? 0 : since < 0.12 ? easeOutQuint(since / 0.12) : 1 - easeInOutCubic(clamp((since - 0.12) / 0.9));
 
 // End card: the card's ground comes in with `alpha` (1 on a hard cut), then logo, title and URL
-// come into focus one after another, as Linear's end cards do: blur 12px → 0 with opacity, no
+// come into focus one after another: blur 12px → 0 with opacity, no
 // movement, 0.7s ease-out-quint each.
 function endCard(t, alpha = 1) {
   if (alpha >= 1) { for (const L of LAYERS) L.el.style.visibility = "hidden"; document.getElementById("fx-light").style.background = "none"; }
