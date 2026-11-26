@@ -4,7 +4,7 @@
 /* ---------- pages: the captured page names and the size they are laid out at ---------- */
 const PAGE = { home: [1440, 1200], order: [1100, 1250] };
 
-/* ---------- mock data: pretty numbers only ---------- */
+/* ---------- data for the rows and the order ---------- */
 const R = prng(7);
 const pick = (a) => a[Math.floor(R() * a.length)];
 const clock = (sec) => { const d = 9 * 3600 + 41 * 60 + 7 + Math.floor(sec); const p = (n) => String(n).padStart(2, "0"); return `${p(Math.floor(d / 3600))}:${p(Math.floor(d / 60) % 60)}:${p(d % 60)}`; };

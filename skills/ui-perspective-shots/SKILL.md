@@ -1,6 +1,6 @@
 ---
 name: ui-perspective-shots
-description: Make a launch video and a set of stills that show a product's real UI on a tilted plane, with depth of field, light falloff and a live, moving interface. Captures the running app's DOM and CSS, fills it with clean mock data, frames it with a 3D camera and renders frame by frame. Use when asked for perspective shots, tilted or angled UI shots, launch or announcement videos of a screen or feature, macro pans across UI, or "shots like these" with dark, angled product references. Triggers on: perspective shot, tilted UI, angled screenshot, isometric UI, launch video, announcement video, feature video, social stills, macro pan, depth of field UI, product shots.
+description: Make a launch video and a set of stills that show a product's real UI on a tilted plane, with depth of field, light falloff and a live, moving interface. Captures the running app's DOM and CSS, frames it with a 3D camera and renders frame by frame. Use when asked for perspective shots, tilted or angled UI shots, launch or announcement videos of a screen or feature, macro pans across UI, or "shots like these" with dark, angled product references. Triggers on: perspective shot, tilted UI, angled screenshot, isometric UI, launch video, announcement video, feature video, social stills, macro pan, depth of field UI, product shots.
 ---
 
 # UI Perspective Shots
@@ -18,27 +18,20 @@ Everything is rendered frame by frame from HTML. Never screen-record: real-time 
 ## 2. Capture the real UI
 
 1. Run the product's dev server from the branch with the final UI. Ask which branch if it isn't clear.
-2. Capture with mock or disconnected accounts only. The capture saves page DOM to disk; a logged-in session would save real names, balances and IDs.
+2. Capture with test or disconnected accounts only. The capture saves page DOM to disk; a logged-in session would save real names, balances and IDs.
 3. List every screen in `shots.config.json` → `pages`. Find real URLs by visiting the index page and reading its links; pick records with the richest content (an order with several line items beats an empty one).
 4. Popovers, menus and results that need an interaction go in `popovers` (click a selector, type text, capture a selector). Type a full identifier when the product only resolves full ones.
 5. Run `node kit/capture.cjs`. It saves each page's DOM, the compiled CSS and the fonts it references, and bundles `capture/data.js`. A font count of zero means the product uses system fonts or the font URLs failed; check before going on.
 
-## 3. Fill it with mock data
+## 3. Prepare the pages
 
-Always mock. Never ship the live values the capture came with. Real data is uneven (a zero fill, a ten-decimal size, a truncated name) and reads as broken at a glance.
-
-- Numbers are round and varied: `12,000`, `2.5`, `0.25`, `$1,250.00`. Two decimals at most unless the unit needs more.
-- Names (products, markets, plans, customers) are ones a user of this product would recognise; invent nothing that looks off-brand.
-- IDs are short (`37`, `#1042`); hashes are random hex with a recognisable head (`0x7a3f9c…`).
-- One hero record carries the story across screens: the same order or transaction appears in the search result, the record page and the activity list.
-- Statuses are the ones that look alive: open, in progress, done. Failures do not appear.
-
-Drive the data into the captured DOM:
+Rows that arrive during a shot need content to arrive with. Set it in the captured DOM:
 - Rows: clone a captured row as a template and set each zone. Never rebuild rows from scratch.
 - Record pages: set values by their label (`setDD(page, "Status", …)`). Labels are stable; positions are not.
-- Remove temporary chrome in `cleanChrome`: announcement banners, migration prompts, dev overlays. Keep the navigation and the product's own controls.
 
-Check every scene flat before any camera work: `node kit/flat.cjs`, then look at each `out/flat-<scene>.png`. Fix anything truncated, empty, duplicated or still showing a template's original value. A flat page that looks wrong looks worse at an angle.
+Remove temporary chrome in `cleanChrome`: announcement banners, migration prompts, dev overlays. Keep the navigation and the product's own controls.
+
+Check every scene flat before any camera work: `node kit/flat.cjs`, then look at each `out/flat-<scene>.png`. Fix anything truncated, empty or duplicated. A flat page that looks wrong looks worse at an angle.
 
 When the product itself clips or breaks something (a truncated timestamp, an overflowing label), fix it in the shot and report it as a product bug. Never silently ship the bug, never silently hide it.
 

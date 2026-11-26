@@ -1,5 +1,5 @@
 // Renders each scene flat (no camera, no blur) to out/flat-<scene>.png, to check that the
-// mock data landed in the real UI before any camera work. Prints page errors.
+// pages read right before any camera work. Prints page errors.
 //
 //   node kit/flat.cjs                 every scene in PAGE
 //   node kit/flat.cjs home,tx         just these

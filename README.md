@@ -2,7 +2,7 @@
 
 An agent skill that films your product's real UI on a tilted plane: depth of field, light falloff and a live interface, rendered frame by frame. It makes one launch video and a set of stills.
 
-Capture the real page, fill it with mock data, then point a camera at it.
+Capture the real page, then point a camera at it.
 
 ![A live activity feed shot on a tilted plane, rows landing while the camera drifts](media/reference.jpg)
 
@@ -40,7 +40,7 @@ Then ask your agent for the set, or call it directly:
 | `skills/ui-perspective-shots/kit/run.js` | Builds the stage, picks a reel and exposes `frameAt(t)`, `stillAt(n)` and `reelLength` |
 | `skills/ui-perspective-shots/kit/stage.html` | The page the renderer loads (copy it to `index.html`) |
 | `skills/ui-perspective-shots/kit/render.cjs` | Renderer: frames, stills or H.264 video, one exact frame at a time |
-| `skills/ui-perspective-shots/kit/flat.cjs` | Renders each page head-on to check the mock data |
+| `skills/ui-perspective-shots/kit/flat.cjs` | Renders each page head-on, to check it before any camera work |
 | `skills/ui-perspective-shots/kit/measure.cjs` | Prints element positions for aiming the camera |
 | `skills/ui-perspective-shots/kit/motion.py` | Measures camera speed in any video, to compare a cut with a reference |
 | `examples/demo-app/` | A small static dashboard to try the kit on |
@@ -73,7 +73,7 @@ node kit/render.cjs video out/demo.mp4
 ## Safety notes
 
 - `capture.cjs` only visits the pages listed in `shots.config.json`, plus the font files their CSS references (which may live on a font CDN). Font filenames are sanitised, and everything it writes stays in `capture/`.
-- The capture saves page HTML to disk. Point it at a dev server with mock or disconnected accounts, never a logged-in production session.
+- The capture saves page HTML to disk. Point it at a dev server with test or disconnected accounts, never a logged-in production session.
 - The renderer opens the local stage with `--allow-file-access-from-files`, so the stage can load its own CSS, fonts and data. Only render project folders you created.
 - No telemetry, no network calls during rendering, no dependencies beyond `playwright-core` (and `numpy` for `motion.py`).
 
