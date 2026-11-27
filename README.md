@@ -22,7 +22,7 @@ Then ask your agent for the set, or call it directly:
 
 ## What it makes
 
-- One launch video, about 17 seconds at 1080p and 60 fps. A push-in on the title, a drift over the live feed, a hold on the main interaction, one glide on a record, then an end card.
+- One launch video, about 15 seconds at 1080p and 60 fps. Pans across the live surfaces, one glide on a record, one angle throughout, hard cuts.
 - 5 to 8 stills at 3840×2160 from the same capture.
 - Optional reels of camera arcs and macro pans, for separate posts.
 

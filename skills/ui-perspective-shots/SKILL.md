@@ -97,39 +97,46 @@ The interface is never still in a video shot. Everything is a function of `t`; t
 
 Clip moving lists at the list's own container, never at the panel, or new rows draw over the panel header.
 
-### Camera language
+### Camera language: cinematic, never jumpy
 
-Each shot gets one kind of move, and the kinds vary across the reel. A cut where every shot is an arc or a glide reads as busy; a mix reads as filmed.
+The aim is a film, not a screen recording with effects. Every shot should look like it came from one camera operator with one plan. Jumpy, mixed moves read as amateur. When in doubt, do less.
+
+1. Pick one move family for the whole video and keep it. Pans (sideways trucks and drifts) plus holds is the default. Never cut from a pan to a zoom or from a zoom to a pan: across a hard cut, a change of move type reads as a jump.
+2. One move per shot, never two at once. A pan keeps `dz` constant; a push-in keeps `tx`, `ty` and `ox` constant. A drift with a slow push is a pan and a zoom together, so don't.
+3. Keep the angle and camera distance identical across the reel (one `rx`, `rz`, `p`, `dz`). Only the target moves. A new angle on every cut looks like a slideshow.
+4. Run every pan in the same direction, left to right by default, so cuts flow instead of reversing.
+5. Three or four shots is enough. Each extra shot is another cut the eye has to recover from.
 
 ```
 What is the shot for?
-├── Opening / title → steady push-in: dz +100–120 over 2.6–3s, constant speed (track)
-├── A live surface (feeds) → constant drift along the rows, ~4% of frame width per second,
-│   with a slow push; the UI's own motion is the subject
-├── An interaction (search, place, filter) → locked hold, drift under 1% of width per second
-├── Two moments far apart on one page → hold, one 1.3s ease-in-out-cubic glide, hold (pairs)
-└── A showcase moment, at most one per reel → an arc
+├── A live surface (feeds, tables) → pan along the rows at constant speed, ~5–6% of frame width per second
+├── An interaction (search, place, filter) → locked hold; the UI is the motion
+├── Two moments far apart on one page → hold, one 1.3s ease-in-out-cubic glide, hold (pairs, dz constant)
+└── A showcase moment, at most one per reel and only in an arc reel → an arc
 ```
 
 - Inside a shot, the camera moves at constant speed (`track`) or holds. No ease-in at the start of a shot and no ease-out at its end. Shots are cut into already moving and cut out of still moving. Measured on well-regarded product release videos: about 5% of frame width per second for a drift, 12.5% for a faster track, and holds of 1.5–5s at zero.
 - Easing belongs to one deliberate glide between two holds (`pairs`, 1.3s ease-in-out-cubic).
 - Between shots: hard cuts that land on motion. The incoming shot starts with something already moving (a row arriving, a value changing), so the eye is carried across the cut. Keep dissolves (`xfade`) for reels of arcs.
-- End card: hard cut to the empty card, then logo, title and URL come into focus one after another (blur 12px → 0 with opacity, no movement, 0.7s each, at 0.15 / 0.35 / 0.9s), held to the end.
+- End card (optional): hard cut to the empty card, then logo, title and URL come into focus one after another (blur 12px → 0 with opacity, no movement, 0.7s each, at 0.15 / 0.35 / 0.9s), held to the end.
 - Rotation inside one shot changes by 2° at most, unless the shot is an arc.
 - Never fade the first frame in from black: on most social platforms the first frame is the thumbnail.
 - To compare a cut with a reference video, run `python3 kit/motion.py <video>` (needs numpy). It prints camera speed per half second as a percentage of frame width per second.
+
+### Unreleased pages
+
+When the page isn't public yet, show the content without anything that names it. Hide the navigation bar, the page title or breadcrumb, the search field and the status bar. Hide them after `afterBuild` has measured the layout (set `display: none` on those elements), then re-run `measure.cjs`: the content moves up, so every camera target changes. With the header gone, the first content sits at the page's top edge, so frame it near the top-left corner of the screen. Centred, the empty space above the page fills half the frame.
 
 ## 6. Build the launch video
 
 | # | Shot | Move | Length |
 |---|------|------|--------|
-| 1 | Hook: logo and page title, live motion below | Steady push-in | 2.8s |
-| 2 | Live surface (the busiest screen) | Constant drift along the rows | 3.8s |
-| 3 | Core interaction (search, place, filter) | Locked hold | 3.6s |
-| 4 | Payoff: a record changing state, read close | Hold, 1.3s glide, hold | 4.4s |
-| 5 | End card: product mark, feature name in the product's title face, short URL | Static, lines focus in | 3.0s |
+| 1 | Live surface (the busiest screen), rows landing from the first frame | Pan along the rows | 4.4s |
+| 2 | Payoff: a record changing state, read close | Hold, 1.3s glide, hold | 4.4s |
+| 3 | A second surface (a list or history) | Pan, same direction | 4.2s |
+| 4 | End card, if the feature is public: product mark, feature name, short URL | Static, lines focus in | 3.0s |
 
-About 17.5s, hard cuts throughout. The hook must read with the sound off on a phone in the first second. Confirm the URL before posting; never guess a launch address. If the result feels rushed, stretch the whole reel with `SPEEDS = { launch: 1.15 }` rather than retiming shots one by one; that keeps camera, UI motion and cuts in proportion.
+About 13–16s, one angle and one camera distance throughout, hard cuts. The first shot must read with the sound off on a phone in the first second. Confirm the URL before posting; never guess a launch address. If the result feels rushed, stretch the whole reel with `SPEEDS = { launch: 1.15 }` rather than retiming shots one by one; that keeps camera, UI motion and cuts in proportion.
 
 ## 7. Review, then render
 
