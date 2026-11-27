@@ -109,7 +109,7 @@ The aim is a film, not a screen recording with effects. Every shot should look l
 
 ```
 What is the shot for?
-├── A live surface (feeds, tables) → pan along the rows at constant speed, ~5–6% of frame width per second
+├── A live surface (feeds, tables) → pan along the rows at constant speed, 5–8% of frame width per second (measure with motion.py; above 10% reads as a whip)
 ├── An interaction (search, place, filter) → locked hold; the UI is the motion
 ├── Two moments far apart on one page → hold, one 1.3s ease-in-out-cubic glide, hold (pairs, dz constant)
 └── A showcase moment, at most one per reel and only in an arc reel → an arc
