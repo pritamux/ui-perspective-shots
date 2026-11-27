@@ -69,8 +69,8 @@ Which framing?
 │   └── Orbit a lifted element: rz -72 → -36 around a popover or result
 │   Never sweep more than 40° in 5s; faster reads as a spin.
 └── Two moments on one page far apart (status at top, figures at bottom)
-    pairs: hold near the first, one 1.3s glide, hold near the second
-    Why: a single wide frame makes both moments too small to read.
+    two shots, one per moment, or one constant pan past both. Never hold, glide, hold:
+    each part eases to a stop and the camera reads as stalling.
 ```
 
 Every shot must:
@@ -111,12 +111,12 @@ The aim is a film, not a screen recording with effects. Every shot should look l
 What is the shot for?
 ├── A live surface (feeds, tables) → pan along the rows at constant speed, 5–8% of frame width per second (measure with motion.py; above 10% reads as a whip)
 ├── An interaction (search, place, filter) → locked hold; the UI is the motion
-├── Two moments far apart on one page → hold, one 1.3s ease-in-out-cubic glide, hold (pairs, dz constant)
+├── A record changing state → slow constant pan in the reel's direction, focus fixed on the value that changes
 └── A showcase moment, at most one per reel and only in an arc reel → an arc
 ```
 
 - Inside a shot, the camera moves at constant speed (`track`) or holds. No ease-in at the start of a shot and no ease-out at its end. Shots are cut into already moving and cut out of still moving. Measured on well-regarded product release videos: about 5% of frame width per second for a drift, 12.5% for a faster track, and holds of 1.5–5s at zero.
-- Easing belongs to one deliberate glide between two holds (`pairs`, 1.3s ease-in-out-cubic).
+- Never stop and start inside a shot. A hold, then a glide, then a hold eases to zero three times and reads as the camera stalling. If two moments sit far apart on one page, give each its own shot, or pan past both at one speed.
 - Between shots: hard cuts that land on motion. The incoming shot starts with something already moving (a row arriving, a value changing), so the eye is carried across the cut. Keep dissolves (`xfade`) for reels of arcs.
 - End card (optional): hard cut to the empty card, then logo, title and URL come into focus one after another (blur 12px → 0 with opacity, no movement, 0.7s each, at 0.15 / 0.35 / 0.9s), held to the end.
 - Rotation inside one shot changes by 2° at most, unless the shot is an arc.
@@ -132,7 +132,7 @@ When the page isn't public yet, show the content without anything that names it.
 | # | Shot | Move | Length |
 |---|------|------|--------|
 | 1 | Live surface (the busiest screen), rows landing from the first frame | Pan along the rows | 4.4s |
-| 2 | Payoff: a record changing state, read close | Hold, 1.3s glide, hold | 4.4s |
+| 2 | Payoff: a record changing state, read close | Slow pan, same direction | 4.4s |
 | 3 | A second surface (a list or history) | Pan, same direction | 4.2s |
 | 4 | End card, if the feature is public: product mark, feature name, short URL | Static, lines focus in | 3.0s |
 
