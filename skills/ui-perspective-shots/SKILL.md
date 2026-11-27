@@ -43,16 +43,14 @@ Camera values:
 
 ```
 Which framing?
-├── Standard angle (feeds, tables, records)
-│   rz -54…-60, rx 50…54, p 1450–1600, dz 540–680
+├── Standard angle (feeds, tables, records): use it for every shot of a reel
+│   rz -54…-60, rx 50…54, p 1450–1600, dz 540–680, the same values in every shot
 │   Why: spinning the page ~55° flat first, then tilting it back, leaves text running
 │   up-right into depth at ~30–35° on screen and fills the frame. With rz around -30
 │   the page recedes along its columns and half the frame is black.
-├── Hook / title (first shot)
-│   rz -38…-42, rx 47…48, dz 720–860, target on the page title
-│   Why: a gentler spin keeps the title readable on a phone in the first second.
-├── Macro truck (sideways move across the screen)
-│   dz 820–1000, depth band 110–170, truck(base, from, to, dur), from − to = 800–1200
+├── Macro truck (sideways move across the screen), for a reel of pans only
+│   dz 820–1000, depth band 110–170, truck(base, from, to, dur), from − to ≈ 75px per
+│   second of shot (320 over 4.2s), which measures 5–8% of frame width per second
 │   ├── Along a long value (hash, ID): rz -10…-14, rx 62–64, reads like a ticker
 │   ├── Across a table's columns: rz -4…-8, rx 58–60, rows recede up the frame
 │   ├── Across a feed: rz -56…-60, rx 55–57
@@ -63,11 +61,12 @@ Which framing?
 │   The pivot is tx/ty and stays fixed on screen and in focus. Speed is constant with
 │   soft ramps over the first and last quarter (cruise): a camera on a track.
 │   ├── Sweep: rz -78 → -38 over a wide subject, dz 420–450, rx 56
-│   ├── Orbit + push: rz -34 → -62 with dz 560 → 760, on a value that changes meanwhile
-│   ├── Crane: rx 64 → 44 with dz 560 → 620, rz fixed near -56
+│   ├── Orbit: rz -34 → -62 at a fixed dz, on a value that changes meanwhile
+│   ├── Crane: rx 64 → 44 at a fixed dz, rz fixed near -56
 │   ├── Macro orbit: rz -8 → -38, rx 62, dz 900–960, depth band 130, on a long value
 │   └── Orbit a lifted element: rz -72 → -36 around a popover or result
-│   Never sweep more than 40° in 5s; faster reads as a spin.
+│   Never sweep more than 40° in 5s; faster reads as a spin. Never change dz during an
+│   arc: orbiting and pushing in at once is two moves.
 └── Two moments on one page far apart (status at top, figures at bottom)
     two shots, one per moment, or one constant pan past both. Never hold, glide, hold:
     each part eases to a stop and the camera reads as stalling.

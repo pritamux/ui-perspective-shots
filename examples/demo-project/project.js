@@ -88,33 +88,31 @@ function orderState(t, at) {
   }
 }
 
-/* ---------- the launch reel: push-in, drift, glide, end card; hard cuts that land on motion ---------- */
+/* ---------- the launch reel: slow pans in one direction, one angle, hard cuts ---------- */
+// Every shot shares the same angle and camera distance; only the target moves. Pans run left to
+// right at constant speed (about 75px of ox per second, 5–8% of frame width per second). No zoom.
 const CUT = { xfade: 0 };
+const LOOK = { rx: 53, rz: -58, p: 1550, dz: 600 };
+const panFocus = (t, c) => focusAtScreen(c, VW / 2, VH / 2, { band: 230, r1: 600, r2: 1250, b1: 2.2, b2: 6.5 });
 const LAUNCH = [
-  { // Hook: steady push-in on the title, rows landing below it from the first frame
-    ...CUT, ...track({ scene: "home", rx: 48, ox: 60, oy: 90, p: 1500, fx: 180, fy: 170 }, { tx: 230, ty: 200, rz: -40.5, dz: 720 }, { tx: 246, ty: 208, rz: -38.5, dz: 840 }, 2.8),
-    state: (t) => feedState(t + 0.4),
+  { // Both feeds, rows landing from the first frame
+    ...CUT, ...track({ scene: "home", ...LOOK, tx: 1160, ty: 560, oy: 40 }, { ox: 160 }, { ox: -160 }, 4.4),
+    focus: panFocus, state: (t) => feedState(t + 0.4),
   },
-  { // Live surface: constant drift along the rows (about 4% of frame width per second)
-    ...CUT, ...track({ scene: "home", ox: -60, oy: 40, p: 1600, band: 230 }, { tx: 1160, ty: 560, rx: 53, rz: -60, dz: 560, fx: 1200, fy: 500 }, { tx: 1290, ty: 535, rx: 52, rz: -58, dz: 660, fx: 1330, fy: 475 }, 3.8),
-    state: (t) => feedState(t + 3.3),
+  { // The order: a slower pan while its status changes, focus fixed on the status
+    ...CUT, ...track({ scene: "order", ...LOOK, tx: 420, ty: 380, oy: 0, fx: 400, fy: 330, band: 240 }, { ox: -60 }, { ox: -220 }, 4.4),
+    state: (t) => orderState(t, [0.7, 1.8, 2.9]),
   },
-  { // Payoff: hold on the status as it changes, one 1.3s glide to the payment figures, hold
-    ...CUT, dur: 4.4,
-    pairs: [
-      [0.0, { scene: "order", tx: 420, ty: 330, rx: 50, rz: -54, dz: 640, ox: 170, oy: 30, p: 1450, fx: 400, fy: 330 }],
-      [1.8, { scene: "order", tx: 440, ty: 360, rx: 49.5, rz: -54.5, dz: 680, ox: 170, oy: 30, p: 1450, fx: 420, fy: 360 }],
-      [3.1, { scene: "order", tx: 440, ty: 820, rx: 50, rz: -56, dz: 640, ox: 170, oy: 30, p: 1450, fx: 420, fy: 820 }],
-      [4.4, { scene: "order", tx: 452, ty: 840, rx: 49.5, rz: -56.5, dz: 690, ox: 170, oy: 30, p: 1450, fx: 432, fy: 840 }],
-    ],
-    state: (t) => orderState(t, [0.5, 1.2, 3.4]),
+  { // Further down the feeds, same direction
+    ...CUT, ...track({ scene: "home", ...LOOK, tx: 700, ty: 820, oy: 40 }, { ox: 160 }, { ox: -160 }, 4.2),
+    focus: panFocus, state: (t) => feedState(t + 5),
   },
   { ...CUT, dur: 3.0, end: true },
 ];
 
 /* ---------- one arc, for comparison: an orbit around the status as the order completes ---------- */
 const ARCS = [
-  { ...arc({ scene: "order", tx: 420, ty: 330, rx: 52, ox: 0, oy: 40, p: 1450, band: 200 }, { rz: -34, dz: 560 }, { rz: -62, dz: 760 }, 5), state: (t) => orderState(t, [1.3, 2.5, 3.7]) },
+  { ...arc({ scene: "order", tx: 420, ty: 330, rx: 52, ox: 0, oy: 40, p: 1450, band: 200 }, { rz: -34, dz: 600 }, { rz: -62, dz: 600 }, 5), state: (t) => orderState(t, [1.3, 2.5, 3.7]) },
 ];
 
 const REELS = { launch: LAUNCH, arcs: ARCS };
